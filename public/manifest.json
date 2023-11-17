@@ -1,7 +1,6 @@
 {
   "manifest_version": 3,
   "name": "Twilio Hubspot-ctd",
-  "$schema": "https://json.schemastore.org/chrome-manifest.json",
   "version": "0.1.0",
   "description": "My Chrome Extension",
   "icons": {
@@ -14,20 +13,56 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Twilio Hubspot-ctd",
-    "default_popup": "popup.html"
   },
   "permissions": [
+    "tabs",
+    "activeTab",
     "storage"
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "resources": [
+        "jquery.js"
+      ]
+    },
+    {
+      "resources": ["hubspot.js", "hubspot.css", "assets/*", "pages/*","jquery.js","env.js","utils.js","languages.js","static/*"],
+      "matches": [ "https://app-eu1.hubspot.com/*", "https://flex.twilio.com/*" ]
+    }
   ],
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "http://app.hubspot.com/*",
+        "https://app.hubspot.com/*",
+        "https://app-eu1.hubspot.com/*",
+        "http://app-eu1.hubspot.com/*",
+        "https://app-eu2.hubspot.com/*",
+        "http://app-eu2.hubspot.com/*",
+        "https://flex.twilio.com/*"
+      ],
+      "exclude_matches": [
+        "*://flex.twilio.com/*",
+        "*://localhost/*"
       ],
       "run_at": "document_idle",
       "js": [
         "contentScript.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://flex.twilio.com/*",
+        "*://localhost/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "flexScript.js"
       ]
     }
   ]
