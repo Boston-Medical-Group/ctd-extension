@@ -1,2 +1,0 @@
-console.log("Flex Script Init"),chrome.runtime.onMessage.addListener((e=>{!async function(e){window.postMessage({...e,from:"FLEX_SCRIPT"})}(e)})),window.addEventListener("message",(function(e){const{data:n}=e;"FLEX"===n.from&&chrome.runtime.sendMessage({...n,from:"FLEX_SCRIPT"})}));
-//# sourceMappingURL=flexScript.js.map

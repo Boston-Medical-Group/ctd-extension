@@ -2,11 +2,12 @@
 window.$ = window.jQuery = require("jquery");
 import contact from "./pages/contact.js";
 import deal from "./pages/deal.js";
+require("./mutation_events.js");
 
 let pages = [contact, deal];
 
 const setup = () => {
-    $("body").off("DOMSubtreeModified");
+    document.body.removeEventListener("DOMSubtreeModified");
     
     const path = window.location.pathname;
     console.log('PATH', path)
@@ -32,6 +33,6 @@ history.pushState = function () {
 };
 
 $(document).ready(() => {
-        console.log("Loading MKTO extension...");
-        setup();
-    })
+    console.log("Loading MKTO extension...");
+    setup();
+})

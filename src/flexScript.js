@@ -3,10 +3,14 @@ chrome.runtime.onMessage.addListener((request) => {
     sendMsgToInjectScript(request);
 });
 async function sendMsgToInjectScript(request) {
-    window.postMessage({
-        ...request,
-        from: "FLEX_SCRIPT"
-    });
+    if (request.actionType === 'gotoCustomer') {
+        window.location.href = 'https://flex.twilio.com/customer/27551';
+    } else {
+        window.postMessage({
+            ...request,
+            from: "FLEX_SCRIPT"
+        });
+    }
 }
 function receiveMessage(event) {
     const {

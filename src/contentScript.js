@@ -107,7 +107,7 @@ function addCallContactActivity() {
 
 window.addEventListener("message", function (event) { 
   if (event.data.from == 'USE_PAGE' &&
-    (event.data.actionType === 'dial' || event.data.actionType === 'gotoCustomer')
+    (event.data.actionType === 'dial' || event.data.actionType === 'gotoCustomer' || event.data.actionType === 'gotoInteraction')
   ) {
     chrome.runtime.sendMessage({
       ...event.data,

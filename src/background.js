@@ -40,10 +40,16 @@ function setThemeType(type) {
 
 function openFlexTab() {
   var newURL = "https://flex.twilio.com/";
+  console.log('TRIGGER WINDOW OPEN');
+  chrome.windows.create({
+    url: newURL,
+    enfocados: true
+  })
+  /*
   chrome.tabs.create({
     url: newURL,
     active: true
-  });
+  });*/
 }
 
 async function getActiveTab() {
@@ -98,7 +104,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
   }
 
-  if (request.actionType === "dial" || request.actionType === "gotoCustomer") {
+  if (request.actionType === "dial" || request.actionType === "gotoCustomer" || request.actionType === "gotoInteraction") {
     sendMsgToFlexScript(request);
   }
 });
