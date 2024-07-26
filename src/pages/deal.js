@@ -5,7 +5,7 @@ const pathRegexs = [pathRegex1, pathRegex2];
 
 function addCallContactActivity() {
     // check if already added
-    if ($(".tf-ctd-activity").length != 0) return;
+    if ($(".tf-ctd-activity-deal").length != 0) return;
 
     let activity, activity2, container;
     /*
@@ -30,7 +30,7 @@ function addCallContactActivity() {
         activity = $(container.find("li")
             .get(0))
             .clone();
-        activity.addClass("tf-ctd-activity");
+        activity.addClass("tf-ctd-activity-deal");
         activity
             .find("button > span")
             .css("background-image", `url("data:image/svg+xml;base64,${base64CallIcon}")`)

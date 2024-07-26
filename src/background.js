@@ -43,7 +43,7 @@ function openFlexTab() {
   console.log('TRIGGER WINDOW OPEN');
   chrome.windows.create({
     url: newURL,
-    enfocados: true
+    focused: true
   })
   /*
   chrome.tabs.create({
@@ -54,7 +54,7 @@ function openFlexTab() {
 
 async function getActiveTab() {
   const [tab] = await chrome.tabs.query({
-    url: ["*://localhost/*", "*://flex.twilio.com/*"],
+    url: ["*://flex.twilio.com/*", "*://localhost/*"],
   });
   return tab;
 }

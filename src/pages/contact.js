@@ -1,6 +1,8 @@
 const pathRegex1 = /\/contacts\/\d+\/contact\/(\d+).*/;
 const pathRegex2 = /\/contacts\/\d+\/record\/[0]\-[1]\/(\d+).*/;
-const pathRegexs = [pathRegex1, pathRegex2];
+const pathRegex3 = /\/contacts\/\d+\/deal\/(\d+).*/;
+const pathRegex4 = /\/contacts\/\d+\/record\/[0]\-[3]\/(\d+).*/;
+const pathRegexs = [pathRegex1, pathRegex2, pathRegex3, pathRegex4];
 
 function addCallContactActivity() {
     // check if already added
@@ -96,35 +98,49 @@ function addCallContactActivity() {
         let crmId = window.location.pathname.split('/')[2];
         // Create a regexp that matches the following path /contacts/143575256/record/0-1/119 and capture the last number
 
-        const match = pathRegex1.exec(window.location.pathname) || pathRegex2.exec(window.location.pathname);
-        if (match) {
-            crmId = match[1];
-        } else {
-    
+        const match1 = pathRegex1.exec(window.location.pathname) || pathRegex2.exec(window.location.pathname);
+        const match2 = pathRegex3.exec(window.location.pathname) || pathRegex4.exec(window.location.pathname);
+        if (match1) {
+            crmId = match1[1];
+            window.postMessage({
+                actionType: "dial",
+                from: "USE_PAGE",
+                phone: window.NOW_PHONE,
+                contact_id: crmId
+            });
+        } else if (match2) {
+            crmId = match2[1];
+            window.postMessage({
+                actionType: "dial",
+                from: "USE_PAGE",
+                phone: null,
+                deal_id: crmId
+            });
         }
-        window.postMessage({
-            actionType: "dial",
-            from: "USE_PAGE",
-            phone: window.NOW_PHONE,
-            contact_id: crmId
-        });
     })
 
     activity2.on("click", function () {
         let crmId = window.location.pathname.split('/')[2];
         // Create a regexp that matches the following path /contacts/143575256/record/0-1/119 and capture the last number
 
-        const match = pathRegex1.exec(window.location.pathname) || pathRegex2.exec(window.location.pathname);
-        if (match) {
-            crmId = match[1];
-        } else {
-
+        const match1 = pathRegex1.exec(window.location.pathname) || pathRegex2.exec(window.location.pathname);
+        const match2 = pathRegex3.exec(window.location.pathname) || pathRegex4.exec(window.location.pathname);
+        if (match1) {
+            crmId = match1[1];
+            window.postMessage({
+                actionType: "gotoInteraction",
+                from: "USE_PAGE",
+                contact_id: crmId
+            });
+        
+        } else if (match2) {
+            crmId = match2[1];
+            window.postMessage({
+                actionType: "gotoInteraction",
+                from: "USE_PAGE",
+                deal_id: crmId
+            });
         }
-        window.postMessage({
-            actionType: "gotoInteraction",
-            from: "USE_PAGE",
-            contact_id: crmId
-        });
     })
 }
 
