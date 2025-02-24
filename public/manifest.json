@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Twilio Hubspot-ctd",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Integración Twilio Flex <> Hubspot",
   "icons": {
     "16": "icons/icon_16.png",
@@ -12,8 +12,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-  },
+  "action": {},
   "permissions": [
     "tabs",
     "activeTab",
@@ -30,8 +29,21 @@
       ]
     },
     {
-      "resources": ["hubspot.js", "hubspot.css", "assets/*", "pages/*","jquery.js","env.js","utils.js","languages.js","static/*"],
-      "matches": [ "https://app-eu1.hubspot.com/*", "https://flex.twilio.com/*" ]
+      "resources": [
+        "hubspot.js",
+        "hubspot.css",
+        "assets/*",
+        "pages/*",
+        "jquery.js",
+        "env.js",
+        "utils.js",
+        "languages.js",
+        "static/*"
+      ],
+      "matches": [
+        "https://app-eu1.hubspot.com/*",
+        "https://flex.twilio.com/*"
+      ]
     }
   ],
   "content_scripts": [
