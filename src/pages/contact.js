@@ -15,6 +15,9 @@ function addCallContactActivity() {
     let containerNewVersion = $(
         ".namespaced-hack-section > .private-card__section > ul.private-list--unstyled"
     );
+    let containerNewVersionV2025 = $(
+        '[class^=LeftSidebar__SidebarRefContainer] [class^=StyledHighlightCard__HighlightEditWrapper] > [class^=View__StyledView] > ul.private-list--unstyled'
+    );
 
     // convert XML from SVG to base64
     const callIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path fill="#506e91" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>'
@@ -36,7 +39,7 @@ function addCallContactActivity() {
             .css("background-size", "13px 13px")
             .css("width", "13px")
             .css("height", "13px");
-        
+
         activity2 = activity.clone();
         activity2.find("button").css("background-image", `url("data:image/svg+xml;base64,${base64MsgIcon}")`)
     } else if (containerNewVersion.length) {
@@ -47,14 +50,32 @@ function addCallContactActivity() {
             .get(0))
             .clone();
         activity.addClass("tf-ctd-activity");
-        
+
         activity
             .find("button > span")
             .css("background-image", `url("data:image/svg+xml;base64,${base64CallIcon}")`)
             .css("background-size", "13px 13px")
             .css("width", "13px")
             .css("height", "13px");
-        
+
+        activity2 = activity.clone();
+        activity2.find("button > span").css("background-image", `url("data:image/svg+xml;base64,${base64MsgIcon}")`)
+    } else if (containerNewVersionV2025.length) {
+        container = containerNewVersionV2025;
+        container.css("flex-wrap", "wrap");
+        // Clone activity from an already existing one
+        activity = $(container.find("li")
+            .get(0))
+            .clone();
+        activity.addClass("tf-ctd-activity");
+
+        activity
+            .find("button > span")
+            .css("background-image", `url("data:image/svg+xml;base64,${base64CallIcon}")`)
+            .css("background-size", "13px 13px")
+            .css("width", "13px")
+            .css("height", "13px");
+
         activity2 = activity.clone();
         activity2.find("button > span").css("background-image", `url("data:image/svg+xml;base64,${base64MsgIcon}")`)
     } else {
@@ -73,7 +94,7 @@ function addCallContactActivity() {
         .text('Llamar')
     activity.find("button > div")
         .text('Llamar');
-    
+
     activity2.find("button > span > span")
         .attr("class", "");
     activity2.find("button > span > span > span")
@@ -82,7 +103,7 @@ function addCallContactActivity() {
         .text('Interactuar')
     activity2.find("button > div")
         .text('Interactuar');
-    
+
     container.prepend(activity, activity2);
 
     activity.on("click", function () {
@@ -132,7 +153,7 @@ function addCallContactActivity() {
                 from: "USE_PAGE",
                 contact_id: crmId
             });
-        
+
         } else if (match2) {
             crmId = match2[1];
             window.postMessage({

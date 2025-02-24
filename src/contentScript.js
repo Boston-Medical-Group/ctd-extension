@@ -13,7 +13,7 @@ window.$ = window.jQuery = require("jquery");
 // For more information on Content Scripts,
 // See https://developer.chrome.com/extensions/content_scripts
 
-//console.log('INSERTING');
+console.log('INSERTING');
 const script = document.createElement("script");
 script.setAttribute("type", "module");
 script.setAttribute("src", chrome.runtime.getURL("hubspot.js"));
@@ -105,7 +105,7 @@ function addCallContactActivity() {
   })
 }*/
 
-window.addEventListener("message", function (event) { 
+window.addEventListener("message", function (event) {
   if (event.data.from == 'USE_PAGE' &&
     (event.data.actionType === 'dial' || event.data.actionType === 'gotoCustomer' || event.data.actionType === 'gotoInteraction')
   ) {
