@@ -50,7 +50,7 @@ function addCallContactActivity() {
         activity = $(container.find("li")
             .get(0))
             .clone();
-        activity.addClass("tf-ctd-activity");
+        activity.addClass("tf-ctd-activity-deal");
 
         activity
             .find("button > span")
