@@ -16,12 +16,13 @@ const setup = () => {
             contact.onLoad();
         }
     });
-
+/*
     deal.pathRegexs.forEach((regex) => {
         if (path.match(regex)) {
             deal.onLoad();
         }
     });
+*/
 };
 
 var pushState = history.pushState;
